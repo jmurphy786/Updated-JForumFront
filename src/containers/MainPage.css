@@ -1,0 +1,27 @@
+.title{
+    padding-bottom: 400px;
+}
+
+.center{
+    height : 1000px;
+    margin : 0px 500px;
+    background-color: orange;
+}
+
+.createPost{
+    position: absolute;
+    bottom : 800px;
+    right: 370px;
+    width: 100px;
+}
+
+.postbtn {
+    margin-top : 20px;
+}
+
+.table {
+    margin-left : -200px;
+    padding-top : 20px;
+    border-collapse: separate;
+    border-spacing: 700px 0px;
+  }

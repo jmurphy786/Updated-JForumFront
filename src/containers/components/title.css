@@ -1,0 +1,53 @@
+
+.searchForm{
+    padding:10px,10px;
+}
+
+.input[type=text] {
+    width: 700px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+}
+
+.row{
+    padding-top: 20px;
+    height: 90px;
+    min-width : 120%;
+}
+
+p{
+    color : orange;
+    padding-left: 80px;
+    font-size : 30px;
+    font-weight: bold;
+}
+
+
+.button1{
+    padding-right:20px;
+    margin: 4px 2px;
+}
+
+.button2{
+    padding-right:20px;
+    margin: 4px 2px;
+}
+
+.middle{
+    padding-left: 220px;
+}
+
+.end {
+    padding-left: 120px;
+}
+
+.logo {
+   
+    width : 80px;
+    height: 50px;
+}
+
+.first {
+    display: inline-block;
+    padding-top : -10px;
+}

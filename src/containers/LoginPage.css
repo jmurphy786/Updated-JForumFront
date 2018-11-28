@@ -1,0 +1,15 @@
+@media all and (min-width: 480px) {
+    .LoginPage {
+      padding: 60px 0;
+    }
+    h1{
+      padding: 100px 20px;
+    }
+    h3{
+      padding: 20px 20px;
+    }
+
+    .buttons{
+      padding-top: 50px;
+    }
+}

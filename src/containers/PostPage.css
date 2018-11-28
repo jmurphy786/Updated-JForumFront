@@ -1,0 +1,15 @@
+
+.postTable {
+    margin-left : -400px;
+    padding-top : 20px;
+    border-collapse: separate;
+    border-spacing: 700px 0px;
+  }
+
+.commentbtn{
+    margin-top : 20px;
+    margin-left : -140px;
+}
+.perComments{
+    padding-bottom : 20px;
+}
