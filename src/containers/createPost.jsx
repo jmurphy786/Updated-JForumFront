@@ -25,8 +25,8 @@ class createPost extends Component {
         var Thetitle = document.getElementById("title").value;
 
         var Themessage = document.getElementById("message").value;
-
-        var input = JSON.stringify({"title" : Thetitle , "message" : Themessage});
+        console.log(this.props.username);
+        var input = JSON.stringify({"title" : Thetitle , "message" : Themessage, "username" : this.props.username});
    
         let request = new XMLHttpRequest();
         request.open("POST", "http://localhost:8080/api/posts");

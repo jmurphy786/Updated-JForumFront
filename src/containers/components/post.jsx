@@ -16,7 +16,8 @@ class post extends Component {
     super(props);
 
     this.state = {
-      username: "",
+      username: this.props.username,
+      Puser : this.props.post.username,
       id : this.props.post.id,
       upvotes: this.props.post.upvotes,
       title: this.props.post.title,
@@ -109,6 +110,7 @@ class post extends Component {
   }
 
     render() {
+      console.log(this.props.username);
 
       if(this.state.img == "none"){
         this.setState({img : ""});
@@ -119,11 +121,11 @@ class post extends Component {
       }
 
       var redirectPath = this.state.redirectPath;
-
       if (redirectPath === "postPage") {
         return <Redirect to=
         {{pathname: "/postPage",
           state : {id : this.props.post.id,
+            username : this.state.username,
             upvotes: this.props.post.upvotes,
             title: this.props.post.title,
             message: this.props.post.message,
@@ -141,7 +143,7 @@ class post extends Component {
          <button type = "button" class="btn btn-default btn-primary downvote" onClick = {this.handleDownvote}><span class="glyphicon glyphicon-menu-down"></span></button>
          </div>
          <div class="media-body">
-         <h2 class="media-heading bg-dark text-warning d-flex"><a href="" onClick = {this.handleClick}>{this.state.title}</a> -Uploaded at : {this.state.date}</h2>
+         <h2 class="media-heading bg-dark text-warning d-flex"><a href="" onClick = {this.handleClick}>{this.state.title}</a> -Uploaded at : {this.state.date} By : {this.state.Puser}</h2>
         <p1 class = "text-light d-flex h2">{this.state.message} </p1>
         <img class = "theImg" id="theImg" src={this.state.img} onerror="onError(this)"></img>
         </div>

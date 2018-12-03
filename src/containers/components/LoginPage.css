@@ -1,4 +1,4 @@
-@media all and (min-width: 480px) {
+
     .LoginPage {
       padding: 60px 0;
     }
@@ -12,4 +12,3 @@
     .buttons{
       padding-top: 50px;
     }
-}

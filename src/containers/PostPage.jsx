@@ -15,7 +15,8 @@ class PostPage extends Component {
         super(props);
     
         this.state = { allComments: [], 
-                       postId : ""};
+                       postId : "",
+                    username : ""};
       }
 
 
@@ -39,9 +40,9 @@ class PostPage extends Component {
       handleCreateMessage = () =>{
 
         var Themessage = document.getElementById("commentMessage").value;
-
-        var input = JSON.stringify({"message" : Themessage});
-   
+        
+        var input = JSON.stringify({"message" : Themessage, "username" : this.props.location.state.username});
+        console.log(input);
         let request = new XMLHttpRequest();
         request.open("POST", "http://localhost:8080/api/posts/" + this.props.location.state.id + "/comments");
         //xhttp.setRequestHeader("Content-Type", "multipart/form-data");
@@ -58,14 +59,13 @@ class PostPage extends Component {
 
     
     render() {
-        console.log(this.state.allComments);
-        console.log(this.props.location.state.id);
+        console.log(this.props.location.state.username);
 
       return (
 
       
           <div>
-               <Title />
+               <Title state = {this.props.location.state.username}/>
                 <div class = "middle">
                 
                 <table class="postTable table-bordered">

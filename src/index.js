@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Main from './containers/MainPage';
-import Post from './containers/components/post';
+
 import * as serviceWorker from './serviceWorker';
 import {
     BrowserRouter as Router,

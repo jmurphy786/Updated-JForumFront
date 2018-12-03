@@ -7,10 +7,10 @@ import {
   Redirect
 } from 'react-router-dom'
 import './App.css';
-import LoginPage from './containers/LoginPage';
 import MainPage from './containers/MainPage';
 import PostPage from './containers/PostPage';
 import CreatePost from './containers/createPost';
+import Login from './containers/components/LoginPage';
 
 
 
@@ -27,10 +27,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={MainPage} />
-          <Route path="/login" component={LoginPage} />
+          <Route exact path="/" component={Login} />
           <Route path="/postPage" component={PostPage} />
           <Route path="/createPost" component={CreatePost} />
+          <Route path="/Main" component={MainPage} />
         </div>
       </Router>
       

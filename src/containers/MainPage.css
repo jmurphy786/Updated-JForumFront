@@ -17,6 +17,7 @@
 
 .postbtn {
     margin-top : 20px;
+    margin-bottom : 20px;
 }
 
 .table {
@@ -24,4 +25,13 @@
     padding-top : 20px;
     border-collapse: separate;
     border-spacing: 700px 0px;
+  }
+
+  .dropdown{
+    
+     padding-right : 44%;
+  }
+
+  .welcome {
+      margin-top : 10px;
   }

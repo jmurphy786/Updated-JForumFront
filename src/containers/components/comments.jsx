@@ -34,6 +34,7 @@ handleCommentUpvote = () =>{
   xhttp.responseType = 'json';
   xhttp.send();
 
+  xhttp.onload =() => {
   let request = new XMLHttpRequest();
   request.open("GET", "http://localhost:8080/api/comments/" + this.props.comment.id + "/upvote");
   request.setRequestHeader("Content-type", "application/json");
@@ -44,8 +45,8 @@ handleCommentUpvote = () =>{
 
   request.onload = ()=>{
     this.setState({id : request.response.id});
-
     }
+  }
 
 }
 
@@ -67,8 +68,7 @@ handleCommentDownvote = () =>{
   request.send();
 
   request.onload = ()=>{
-   this.setState({id : request.response.id});
-
+      this.setState({id : request.response.id});
     }
 
 
@@ -78,10 +78,11 @@ handleCommentDownvote = () =>{
 componentDidMount() {
     
     this.setState({ date: this.props.comment.createdDate.substring(0,10) + " " +  this.props.comment.createdDate.substring(11,19), 
-    id:this.props.comment.upvotes});
+    id:this.props.comment.upvotes, username : this.props.comment.username});
 }
     render() {
-        console.log(this.props.comment);
+      var x = this.state.id;
+
     
       return (
        <div>
@@ -92,8 +93,8 @@ componentDidMount() {
          <button type = "button" class="btn btn-default btn-primary downvote" onClick = {this.handleCommentDownvote}><span class="glyphicon glyphicon-menu-down"></span></button>
          </div>
          <div class="media-body">
-         <h2 class="media-heading bg-white text-warning d-flex border border-light">{this.props.comment.username} : {this.state.date}</h2>
-        <p1 class = "text-dark d-flex h2">{this.props.comment.message} </p1>
+         <h4 class="media-heading bg-white text-warning d-flex">{this.props.comment.username} : {this.state.date}</h4>
+        <p1 class = "text-dark d-flex h4 border border-light">{this.props.comment.message} </p1>
         </div>
         </div>
       </div>     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./title.css"; 
+import Login from "./LoginPage.jsx"
 import $ from 'jquery';
 import Popper from 'popper.js';
 import logo from './logo.png';
@@ -23,21 +24,30 @@ class title extends Component {
 }
 
     handleHome = event => {
-      this.setState({redirectPath : "/"})
-    }
-    
-    handleLogin = event => {
-      this.setState({ redirectPath: "login" });
+      this.setState({redirectPath : "/main"})
     }
 
+    handleLogin = event => {
+      this.setState({redirectPath : "/"})
+    }
+
+  
     render() {
-    var redirectPath = this.state.redirectPath;
-    if (redirectPath === "login") {
-      return <Redirect to="/login" />;
-    }
-    if (redirectPath === "/") {
-      return <Redirect to="/" />;
-    }
+      console.log(this.props.state);
+      var path = this.state.redirectPath;
+      if(path == "/"){
+        return <Redirect to="/" />;
+      }
+
+      if(path == "/main"){
+        return <Redirect to=
+        {{pathname: "/Main",
+          state : {
+            username : this.props.state}}} />;
+      }
+      
+
+
 
     
       return (
@@ -55,11 +65,13 @@ class title extends Component {
       </form>
       </div>
       <div class="col-md-2 end">
-      <button type="button" class="btn btn-light button1" onClick = {this.handleLogin}>Log In</button>
-      <button type="button" class="btn btn-warning button2">Sign Up</button>
-             </div>
+      <button type="button" class="btn btn-light button1" onClick = {this.handleLogin}>Log Out</button>
+      <button type="button" class="btn btn-warning button2" onClick = {this.handleLogin}>Sign Up</button>
+      </div>
+      </div>
+
         </div>
-      </div>     
+  
       );
       
     }
