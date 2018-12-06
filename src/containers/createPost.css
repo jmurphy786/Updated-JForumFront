@@ -1,0 +1,8 @@
+#upload_button input[type=file] {
+    display:none;
+
+  }
+
+.uploadPic {
+    margin-right : 10px;
+}

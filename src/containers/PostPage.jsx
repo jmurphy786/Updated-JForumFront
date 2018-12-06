@@ -16,7 +16,9 @@ class PostPage extends Component {
     
         this.state = { allComments: [], 
                        postId : "",
-                    username : ""};
+                    username : "",
+                    sortedBy : "Sort By:",
+                    updatedList : []};
       }
 
 
@@ -37,6 +39,36 @@ class PostPage extends Component {
         };
       }
 
+      
+      sortByUpvotes = () => {
+        this.setState({allComments : [], updatedList : []});
+        let request = new XMLHttpRequest();
+        request.open("GET", "http://localhost:8080/api/" + this.props.location.state.id + "/sortCommentsByUpvotes");
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+        request.responseType = "json";
+        request.send();
+        request.onload = () => {
+          this.setState({updatedList : request.response, sortedBy : "Upvotes :", allComments : []});
+
+        };
+      }
+
+
+      sortByDateAscending = event => {
+        this.setState({allComments : [], updatedList : []});
+        let request = new XMLHttpRequest();
+        request.open("GET", "http://localhost:8080/api/" + this.props.location.state.id +"/sortByDateAscending");
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+        request.responseType = "json";
+        request.send();
+        request.onload = () => {
+          this.setState({ sortedBy : "Date :", allComments : request.response});
+
+        };
+      }
+
       handleCreateMessage = () =>{
 
         var Themessage = document.getElementById("commentMessage").value;
@@ -54,16 +86,28 @@ class PostPage extends Component {
         request.send(input);
 
         request.onload = () => { 
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/api/posts/" + this.props.location.state.id + "/comments");
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.setRequestHeader('Access-Control-Allow-Origin','*');
+            xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
+            xhttp.responseType = 'json';
+        
+            xhttp.send();
+        
+            xhttp.onload = () => { 
+              this.setState({updatedList : xhttp.response.content});
       }
     }
+}
 
     
     render() {
         console.log(this.props.location.state.username);
-
+        var postId = this.props.location.state.id;
       return (
 
-      
+        
           <div>
                <Title state = {this.props.location.state.username}/>
                 <div class = "middle">
@@ -80,8 +124,19 @@ class PostPage extends Component {
                 </tr>
                </tbody>
                </table>
+
+            <div class = "buttons">
+                    <div class="dropdown">
+                         <button class="btn-primary dropdown-toggle btn-lg text-dark sortBtn bg-warning" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         {this.state.sortedBy} 
+                        </button>
+                     <div class="dropdown-menu dropSort" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item h4" onClick = {this.sortByUpvotes}>Number of Upvotes.</a>
+                      <a class="dropdown-item h4" onClick = {this.sortByDateAscending}>Recently Created.</a>
+                     </div>
+                  </div>
+
                <button class = "commentbtn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Make a comment!</button>
-              
                 <div class="modal" id="myModal">
                      <div class="modal-dialog">
                         <div class="modal-content">
@@ -101,17 +156,25 @@ class PostPage extends Component {
                  <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
-
               </div>
              </div>
             </div>
+            </div>
+
                 <table class="postTable" >
                 <tbody >
                 {this.state.allComments
                 .map(function(item, key) {
                 return (
                 <tr key = {key}>
-                     <th ><Comments comment = {item}/></th>
+                     <th ><Comments comment = {item} postId = {postId} /></th>
+                </tr>
+                );})}
+                {this.state.updatedList
+                .map(function(item, key) {
+                return (
+                <tr key = {key}>
+                     <th ><Comments comment = {item} postId = {postId} /></th>
                 </tr>
                 );})}
                </tbody>

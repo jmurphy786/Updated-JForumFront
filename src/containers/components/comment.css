@@ -8,3 +8,8 @@
     margin-bottom : 20px;
 }
 
+.delete {
+    position : absolute;
+    right : 420px;
+}
+

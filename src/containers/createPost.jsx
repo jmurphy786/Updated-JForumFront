@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './createPost.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -55,16 +56,24 @@ class createPost extends Component {
             xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
             xhttp.send(fd);
             xhttp.onload = () => { 
+            
             ;}
             }  
           };
       }
-      fileSelectedHandler = event => {
+      imgfileSelectedHandler = event => {
         this.setState({
           selectedFile: event.target.files[0]
         })
         console.log(event.target.files[0]);
      }
+
+     vidfileSelectedHandler = event => {
+      this.setState({
+        selectedFile: event.target.files[0]
+      })
+      console.log(event.target.files[0]);
+   }
 
     render() {
     
@@ -89,9 +98,19 @@ class createPost extends Component {
            </div>
          </form>
 
-            <div>
-            <input type = "file" onChange={this.fileSelectedHandler}/>
+            <div id="upload_button">
+            <label class = "uploadPic">
+            <input type = "file"  ngf-select onChange={this.imgfileSelectedHandler} nv-file-select uploader="$ctrl.uploader" multiple/>
+            <span class="glyphicon glyphicon-picture btn-warning btn-lg"></span>
+            </label>
+            
+            <label class = "uploadFile">
+            <input type = "file"  ngf-select onChange={this.vidSelectedHandler} nv-file-select uploader="$ctrl.uploader" multiple/>
+            <span class="glyphicon glyphicon-film btn-warning btn-lg"></span>
+            </label>
             </div>
+
+          
 
            <div class = "buttons">
            <button type = "createPost" onClick = {this.handleCreatePost} class=" btn-lg btn-secondary mr-sm-2">CreatePost</button>

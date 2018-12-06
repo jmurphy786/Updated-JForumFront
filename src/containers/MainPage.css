@@ -15,9 +15,24 @@
     width: 100px;
 }
 
-.postbtn {
-    margin-top : 20px;
-    margin-bottom : 20px;
+.postbtn{
+    background-color : yellow;
+    border : solid;
+    border-color : black;
+}
+
+.sortBtn {
+    
+    background-color : yellow;
+    border : solid;
+    border-color : black;
+
+}
+
+.dropSort {
+    background-color :  yellow;
+    border : solid;
+    border-color : black;
 }
 
 .table {
@@ -28,10 +43,31 @@
   }
 
   .dropdown{
-    
-     padding-right : 44%;
+      padding-top : 0.3%;
+    padding-left : 9%;
   }
 
   .welcome {
       margin-top : 10px;
   }
+
+  .sortHeader{
+    text-align: center;
+  }
+
+  .postbtn{
+      margin-top : 20px;
+  }
+
+
+  .top{
+    display: inline-block;
+}
+
+.makeAPost{
+    right : 25.9%;
+    top : 140px;
+    position : absolute;
+}
+
+  

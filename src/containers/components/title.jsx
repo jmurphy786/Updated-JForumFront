@@ -51,22 +51,22 @@ class title extends Component {
 
     
       return (
-       <div class = "thenav bg-dark border border-light">
+       <div class = "thenav">
         <div class="row ">
              <div class="col-md-2 first">
-             <p class="text-warning"><img src={logo} class = "logo" onClick={this.handleHome}></img>     Jforum  </p>
+             <p class="LogoTitle text-warning"><img src={logo} class = "logo" onClick={this.handleHome}></img>     Jforum  </p>
              </div>
         <div class="col-md-6 middle">
         <form class="searchForm form-inline ">
       <div>
           <input type="text" class="input form-control" placeholder="Search"></input>
           </div>
-        <button type="submit" class="btn btn-default btn-warning">Search</button>
+        <button type="submit" class="btn btn-default btn-dark">Search</button>
       </form>
       </div>
       <div class="col-md-2 end">
       <button type="button" class="btn btn-light button1" onClick = {this.handleLogin}>Log Out</button>
-      <button type="button" class="btn btn-warning button2" onClick = {this.handleLogin}>Sign Up</button>
+      <button type="button" class="btn btn-dark button2" onClick = {this.handleLogin}>Sign Up</button>
       </div>
       </div>
 

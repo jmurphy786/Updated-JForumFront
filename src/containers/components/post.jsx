@@ -25,7 +25,8 @@ class post extends Component {
       date: this.props.post.date,
       allComments : this.props.post.allComments,
       redirectPath : "",
-      img : ""
+      img : "",
+      vidFile : ""
     };
   
   }
@@ -33,19 +34,51 @@ class post extends Component {
   componentWillMount() {
     
       this.setState({ date: this.props.post.date.substring(0,10) + " " +  this.props.post.date.substring(11,19)});
-      let html = new XMLHttpRequest();
-    
-      html.open("GET", "http://localhost:8080/api/Image/" + this.state.id);
-  
-      html.setRequestHeader("Content-Type", "application/json");
-  
-      html.setRequestHeader("Access-Control-Allow-Origin", "*");
-  
-      html.send();
-  
-      html.onload = () => {
-        this.setState({ img: "data:image/jpeg;base64," + html.response });
-      };
+
+      let request = new XMLHttpRequest();
+      request.open("GET", "http://localhost:8080/api/getFile/" + this.state.id);
+      request.setRequestHeader("Content-Type", "application/json");
+      request.setRequestHeader("Access-Control-Allow-Origin", "*");
+      request.send();
+      request.onload = () => {
+      var extension = request.response;
+      console.log(extension);
+      if(extension == "jpg" || extension == "JPG"){
+         let html = new XMLHttpRequest();
+         html.open("GET", "http://localhost:8080/api/Image/" + this.state.id);
+         html.setRequestHeader("Content-Type", "application/json");
+         html.setRequestHeader("Access-Control-Allow-Origin", "*");
+         html.send();
+         html.onload = () => {
+            this.setState({ img: "data:image/jpeg;base64," + html.response });
+         };
+      }
+
+      
+      if(extension == "gif"){
+        let html = new XMLHttpRequest();
+        html.open("GET", "http://localhost:8080/api/gif/" + this.state.id);
+        html.setRequestHeader("Content-Type", "application/json");
+        html.setRequestHeader("Access-Control-Allow-Origin", "*");
+        html.send();
+        html.onload = () => {
+           this.setState({ img: "data:image/gif;base64," + html.response });
+        };
+      }
+
+      if(extension == "mp4"){
+        let html = new XMLHttpRequest();
+        html.open("GET", "http://localhost:8080/api/mp4/" + this.state.id);
+        html.setRequestHeader("Content-Type", "application/json");
+        html.setRequestHeader("Access-Control-Allow-Origin", "*");
+        html.send();
+        html.onload = () => {
+   
+           this.setState({ img: "data:video/mp4;base64," + html.response });
+           console.log(this.state.img);
+        };
+      }
+    };
   }
 
   handleUpvote = () =>{
@@ -56,18 +89,9 @@ class post extends Component {
     xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
     xhttp.responseType = 'json';
     xhttp.send();
- 
-    let request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:8080/api/posts/" + this.state.id + "/upvote");
-    request.setRequestHeader("Content-type", "application/json");
-    request.setRequestHeader('Access-Control-Allow-Origin','*');
-    request.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
-    request.responseType = 'json';
-    request.send();
-
-    request.onload = ()=>{
-     x = request.response;
-      }
+    xhttp.onload = () => {
+      this.setState({upvotes : xhttp.response.upvotes});
+       };
 
   }
 
@@ -79,20 +103,24 @@ class post extends Component {
     xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
     xhttp.responseType = 'json';
     xhttp.send();
- 
-    let request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:8080/api/posts/" + this.state.id + "/upvote");
-    request.setRequestHeader("Content-type", "application/json");
-    request.setRequestHeader('Access-Control-Allow-Origin','*');
-    request.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
-    request.responseType = 'json';
-    request.send();
+    xhttp.onload = () => {
+     this.setState({upvotes : xhttp.response.upvotes});
+      };
+  }
 
-    request.onload = ()=>{
-     x = request.response;
-
-      }
-
+  deletePost = () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "http://localhost:8080/api/posts/" + this.state.id);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader('Access-Control-Allow-Origin','*');
+    xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
+    xhttp.responseType = 'json';
+    xhttp.send();
+  
+    xhttp.onload =() => {
+  
+      console.log("Deleted");
+      };
   }
 
 
@@ -139,7 +167,7 @@ class post extends Component {
         <div class="media bg-dark">
         <div class="media-left votes border border-dark">
         <button type = "button" class="btn btn-default btn-primary upvote" onClick = {this.handleUpvote}><span class="glyphicon glyphicon-menu-up"></span></button>
-        <p class = "text-warning">{this.state.upvotes}</p>
+        <p class = "text-warning" >{this.state.upvotes}</p>
          <button type = "button" class="btn btn-default btn-primary downvote" onClick = {this.handleDownvote}><span class="glyphicon glyphicon-menu-down"></span></button>
          </div>
          <div class="media-body">
@@ -147,6 +175,8 @@ class post extends Component {
         <p1 class = "text-light d-flex h2">{this.state.message} </p1>
         <img class = "theImg" id="theImg" src={this.state.img} onerror="onError(this)"></img>
         </div>
+        <button type = "button" class="btn btn-default btn-dark delete" onClick = {this.deletePost}><span class="
+        glyphicon glyphicon-trash"></span></button>
         </div>
 
 

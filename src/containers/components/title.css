@@ -51,3 +51,10 @@ p{
     display: inline-block;
     padding-top : -10px;
 }
+
+.thenav {
+    background-color : #1A1A1D;
+    border: solid;
+    border-color : yellow;
+}
+
